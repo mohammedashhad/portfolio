@@ -1,9 +1,7 @@
-// ===== Dark Mode Toggle =====
 const themeToggle = document.getElementById('themeToggle');
 const themeIcon = document.getElementById('themeIcon');
 const html = document.documentElement;
 
-// Check for saved theme preference or default to light mode
 const currentTheme = localStorage.getItem('theme') || 'light';
 html.setAttribute('data-theme', currentTheme);
 updateThemeIcon(currentTheme);
@@ -27,7 +25,6 @@ function updateThemeIcon(theme) {
     }
 }
 
-// ===== Mobile Menu Toggle =====
 const menuToggle = document.getElementById('menuToggle');
 const navMenu = document.getElementById('navMenu');
 const navLinks = document.querySelectorAll('.nav-link');
@@ -37,7 +34,6 @@ menuToggle.addEventListener('click', () => {
     menuToggle.classList.toggle('active');
 });
 
-// Close menu when clicking on a link
 navLinks.forEach(link => {
     link.addEventListener('click', () => {
         navMenu.classList.remove('active');
@@ -45,7 +41,6 @@ navLinks.forEach(link => {
     });
 });
 
-// Close menu when clicking outside
 document.addEventListener('click', (e) => {
     if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
         navMenu.classList.remove('active');
@@ -53,7 +48,6 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// ===== Smooth Scrolling =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -68,7 +62,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// ===== Navbar Scroll Effect =====
 let lastScroll = 0;
 const navbar = document.querySelector('.navbar');
 
@@ -84,7 +77,6 @@ window.addEventListener('scroll', () => {
     lastScroll = currentScroll;
 });
 
-// ===== Active Section Highlighting =====
 const sections = document.querySelectorAll('section[id]');
 const navLinksArray = document.querySelectorAll('.nav-link');
 
@@ -109,7 +101,6 @@ function highlightActiveSection() {
 
 window.addEventListener('scroll', highlightActiveSection);
 
-// ===== Intersection Observer for Animations =====
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -100px 0px'
@@ -124,7 +115,6 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe elements for animation
 document.addEventListener('DOMContentLoaded', () => {
     const animateElements = document.querySelectorAll('.project-card, .skill-category, .stat-item, .about-text, .contact-form');
     
@@ -136,13 +126,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// ===== Contact Form Handling =====
 const contactForm = document.getElementById('contactForm');
 
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
     
-    // Get form values
     const formData = {
         name: document.getElementById('name').value,
         email: document.getElementById('email').value,
@@ -150,27 +138,23 @@ contactForm.addEventListener('submit', (e) => {
         message: document.getElementById('message').value
     };
     
-    // Here you would typically send the data to a server
-    // For now, we'll just show a success message
+
     showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
     
-    // Reset form
+
     contactForm.reset();
 });
 
 function showNotification(message, type = 'success') {
-    // Remove existing notification if any
     const existingNotification = document.querySelector('.notification');
     if (existingNotification) {
         existingNotification.remove();
     }
     
-    // Create notification element
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
     notification.textContent = message;
     
-    // Add styles
     notification.style.cssText = `
         position: fixed;
         top: 100px;
@@ -187,7 +171,7 @@ function showNotification(message, type = 'success') {
     
     document.body.appendChild(notification);
     
-    // Remove after 3 seconds
+
     setTimeout(() => {
         notification.style.animation = 'slideOut 0.3s ease';
         setTimeout(() => {
@@ -196,7 +180,6 @@ function showNotification(message, type = 'success') {
     }, 3000);
 }
 
-// Add animation keyframes dynamically
 const style = document.createElement('style');
 style.textContent = `
     @keyframes slideIn {
@@ -231,7 +214,6 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// ===== Typing Effect for Hero (Optional Enhancement) =====
 function typeWriter(element, text, speed = 100) {
     let i = 0;
     element.textContent = '';
@@ -247,7 +229,7 @@ function typeWriter(element, text, speed = 100) {
     type();
 }
 
-// ===== Scroll to Top Button (Optional) =====
+
 let scrollTopBtn;
 
 function createScrollTopButton() {
@@ -292,7 +274,7 @@ function createScrollTopButton() {
     
     document.body.appendChild(scrollTopBtn);
     
-    // Show/hide button based on scroll position
+   
     window.addEventListener('scroll', () => {
         if (window.pageYOffset > 300) {
             scrollTopBtn.style.display = 'flex';
@@ -302,27 +284,27 @@ function createScrollTopButton() {
     });
 }
 
-// Initialize scroll to top button
+
 createScrollTopButton();
 
-// ===== Performance Optimization: Lazy Loading Images =====
+
 if ('IntersectionObserver' in window) {
     const imageObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // If you add real images later, you can lazy load them here
+              
                 observer.unobserve(entry.target);
             }
         });
     });
     
-    // Observe any images you add in the future
+
     document.querySelectorAll('img[data-src]').forEach(img => {
         imageObserver.observe(img);
     });
 }
 
-// ===== Console Message =====
+
 console.log('%c👋 Hello! Thanks for checking out my portfolio!', 'color: #6366f1; font-size: 16px; font-weight: bold;');
 console.log('%cFeel free to reach out if you\'d like to collaborate!', 'color: #64748b; font-size: 12px;');
 
