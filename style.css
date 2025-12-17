@@ -579,8 +579,22 @@ section {
     color: var(--primary-color);
 }
 
+.skill-item .skill-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--primary-color);
+    object-fit: contain;
+    flex-shrink: 0;
+    vertical-align: middle;
+    display: inline-block;
+}
+
 .skill-item:hover i {
     color: white;
+}
+
+.skill-item:hover .skill-icon {
+    filter: brightness(0) invert(1);
 }
 
 .skill-item span {
